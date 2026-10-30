@@ -11,7 +11,7 @@
 /* Layout: una columna de lectura; pantallas de ejemplo como "fichas" de biblioteca */
 :root{
   --bg:#F4F6F8; --card:#FFFFFF; --ink:#18232E; --muted:#5B6773; --line:#D9DFE5;
-  --accent:#1F6B57; --accent-soft:#E2F0EB; --warn:#B45309; --warn-soft:#FDF0E1; --bad:#B42318;
+  --accent:#1F6B57; --accent-soft:#E2F0EB; --warn:#9A4508; --warn-soft:#FDF0E1; --bad:#B42318;
   --display:"Bricolage Grotesque",system-ui,sans-serif; --body:"Source Sans 3",system-ui,sans-serif; --mono:"IBM Plex Mono",ui-monospace,monospace;
 }
 @media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
@@ -109,8 +109,8 @@ th{font:500 .72rem var(--mono);text-transform:uppercase;letter-spacing:.06em;col
   <h2>Koha funciona, pero nos frena</h2>
   <div class="grid">
     <div class="box"><h3>Depende de un servidor físico</h3><p>Koha corre en un servidor del colegio. Cuando se va la luz se apaga, hay que reiniciarlo y mientras tanto nadie puede prestar ni buscar libros.</p></div>
-    <div class="box"><h3>Los respaldos están en el mismo disco</h3><p>Koha guarda copias de solo 2 días y en el mismo servidor. Si ese disco se daña, se pierden los datos y las copias.</p></div>
-    <div class="box"><h3>Registrar es difícil</h3><p>Koha ya permite un libro con varias copias, pero el proceso es complicado. Y el modo sin internet que traía quedó obsoleto en la versión 23.11.</p></div>
+    <div class="box"><h3>Los respaldos pueden estar en el mismo disco</h3><p>Koha, tal como viene instalado, guarda copias de solo 2 días en el mismo servidor. Hay que confirmar con IT cómo está en el colegio: si las copias están en ese disco y se daña, se pierde todo.</p></div>
+    <div class="box"><h3>Registrar es difícil</h3><p>Koha ya permite un libro con varias copias, pero el proceso es complicado. Y el modo sin internet que venía dentro de Koha se quitó en la versión 23.11; solo quedan un complemento de Firefox y una herramienta de Windows.</p></div>
   </div>
   <p class="note">Unos 20,000 libros y unos 800 usuarios. Cada copia ya tiene su propia etiqueta de código de barras del colegio, aparte del ISBN.</p>
 </section>
@@ -119,7 +119,7 @@ th{font:500 .72rem var(--mono);text-transform:uppercase;letter-spacing:.06em;col
   <span class="eyebrow">Cómo está armado</span>
   <h2>Tres capas: Koha en la nube, nuestra app encima y un modo sin internet</h2>
   <div class="layers">
-    <div class="layer"><h3>1 · Koha en la nube</h3><p>Pasamos el Koha de hoy, con todos sus datos, a un servidor en internet. No se pierde nada y ya no depende de la luz del colegio. Respaldo automático cada noche, guardado fuera del servidor.</p></div>
+    <div class="layer"><h3>1 · Koha en la nube</h3><p>Pasamos el Koha de hoy, con todos sus datos y archivos subidos, a un servidor en internet. Antes de usarlo comparamos que estén todos los libros, usuarios y préstamos. Ya no depende de la luz del colegio. Respaldo automático cada noche, guardado fuera del servidor.</p></div>
     <div class="layer"><h3>2 · App BiblioIAE</h3><p>Una app fácil encima de Koha, conectada por su API: catálogo bonito, registro rápido de copias, letreros, estadísticas y el asistente de IA. Koha sigue siendo el motor.</p></div>
     <div class="layer"><h3>3 · Modo sin internet</h3><p>La compu del mostrador guarda el catálogo y los usuarios. Si se cae el internet sigue prestando y devolviendo, y al volver sube todo solo y en orden.</p></div>
   </div>
@@ -218,7 +218,8 @@ th{font:500 .72rem var(--mono);text-transform:uppercase;letter-spacing:.06em;col
     <tr><td><b>Libib</b></td><td>$99 al año</td><td>Escanear el ISBN con el celular y que se llene solo; kiosco en tableta</td></tr>
     <tr><td><b>Atriuum</b></td><td>Por cotización</td><td>Pasa a modo sin internet solo y sincroniza al volver</td></tr>
     <tr><td><b>Soutron</b></td><td>Por cotización</td><td>La IA solo responde con libros que existen en el catálogo</td></tr>
-    <tr><td><b>Accessit / Beanstack</b></td><td>Desde $295 al año</td><td>Retos de lectura, insignias, lectura por nivel</td></tr>
+    <tr><td><b>Beanstack</b></td><td>Desde $295 al año</td><td>Retos de lectura, insignias, bingo</td></tr>
+    <tr><td><b>Accessit</b></td><td>Por cotización</td><td>Lectura por nivel y búsqueda visual</td></tr>
     <tr><td><b>Koha (lo de hoy)</b></td><td>Gratis</td><td>Lo mantenemos como motor: es completo y no perdemos datos</td></tr>
   </table></div>
   <p class="src">Precios de sitios oficiales y comparadores (Capterra, FitGap); pueden variar.</p>
@@ -261,7 +262,7 @@ th{font:500 .72rem var(--mono);text-transform:uppercase;letter-spacing:.06em;col
   <span class="eyebrow">Ingeniería</span>
   <h2>Cómo lo hacemos seguro y confiable</h2>
   <div class="grid">
-    <div class="box"><h3>Datos de menores</h3><p>Se rige por la Ley 81 de 2019 de Panamá. Solo guardamos nombre, grado y código. Cada persona ve solo lo que le toca según su rol.</p></div>
+    <div class="box"><h3>Datos de menores</h3><p>Se rige por la Ley 81 de 2019 de Panamá; el colegio debe confirmar que se pueden guardar en un servidor fuera del país. Solo guardamos lo necesario: nombre, grado, código, correo para avisos y préstamos. Cada persona ve solo lo que le toca según su rol.</p></div>
     <div class="box"><h3>La IA no ve alumnos</h3><p>El asistente solo recibe datos del catálogo, nunca nombres ni historiales de estudiantes. Tiene un tope fijo de gasto al mes.</p></div>
     <div class="box"><h3>Respaldos probados</h3><p>Copia cifrada cada noche fuera del servidor. Una vez al mes se restaura una copia para comprobar que sirve.</p></div>
     <div class="box"><h3>Correos que llegan</h3><p>Las alertas salen de una cuenta del colegio (por ejemplo biblioteca@), configurada para que no caigan en spam.</p></div>
@@ -277,7 +278,7 @@ th{font:500 .72rem var(--mono);text-transform:uppercase;letter-spacing:.06em;col
     <tr><th>Qué</th><th>Costo</th><th>Nota</th></tr>
     <tr><td>Servidor de Koha en la nube</td><td>$10 a $45 al mes</td><td>Según el proveedor; lo estamos comparando</td></tr>
     <tr><td>Asistente IA</td><td>Unos $2 a $5 al mes</td><td>Con tope fijo</td></tr>
-    <tr><td>UPS para el mostrador</td><td>Unos $90, una vez</td><td>Aguanta cerca de 1 hora sin luz</td></tr>
+    <tr><td>UPS para el mostrador</td><td>Unos $90, una vez</td><td>Por dimensionar: depende de qué se conecte (router, lector)</td></tr>
     <tr><td>Lector 2D (también lee QR)</td><td>$25 a $60, una vez</td><td>Solo si el actual no lee QR</td></tr>
   </table></div>
 </section>
@@ -286,7 +287,7 @@ th{font:500 .72rem var(--mono);text-transform:uppercase;letter-spacing:.06em;col
   <span class="eyebrow">Para empezar</span>
   <h2>Lo que necesitamos del colegio</h2>
   <div class="grid">
-    <div class="box"><h3>Copia de Koha</h3><p>Que IT haga una copia completa (comando koha-dump) y nos diga la versión.</p></div>
+    <div class="box"><h3>Copia de Koha</h3><p>Que IT haga una copia con <span class="code">koha-dump --uploaded_files</span> (salen 2 archivos) y nos diga la versión de Koha.</p></div>
     <div class="box"><h3>Correo del colegio</h3><p>Una cuenta para mandar las alertas de atraso.</p></div>
     <div class="box"><h3>Cuenta del servidor</h3><p>Los servidores piden que la cuenta sea de un adulto o del colegio. Proponemos que quede a nombre del colegio y nosotros la configuramos.</p></div>
     <div class="box"><h3>Responsable</h3><p>El profesor José Saldaña revisa y mantiene el sistema con nosotros.</p></div>
@@ -300,7 +301,7 @@ th{font:500 .72rem var(--mono);text-transform:uppercase;letter-spacing:.06em;col
   <div class="speech">
     <div class="who"><h3>Marco</h3><span class="pill">abre y explica el problema</span></div>
     <p>Buenos días. Somos Marco y Abraham, y queremos mejorar el sistema de la biblioteca.</p>
-    <p>Hoy la biblioteca usa Koha, que tiene unos 20,000 libros y 800 usuarios. Es un buen programa, pero corre en un servidor del colegio. Cuando se va la luz se apaga, hay que reiniciarlo y mientras tanto nadie puede prestar ni buscar libros. Además, sus copias de seguridad están en el mismo disco: si ese disco se daña, perdemos todo.</p>
+    <p>Hoy la biblioteca usa Koha, que tiene unos 20,000 libros y 800 usuarios. Es un buen programa, pero corre en un servidor del colegio. Cuando se va la luz se apaga, hay que reiniciarlo y mientras tanto nadie puede prestar ni buscar libros. Además, Koha normalmente guarda sus copias de seguridad en el mismo servidor, y eso hay que revisarlo con IT.</p>
     <p>Investigamos cómo lo hacen los mejores sistemas de colegios, como Follett Destiny, Libib y Atriuum, y armamos un plan en tres etapas.</p>
     <p>Primero, pasar Koha a la nube con todos sus datos y respaldos cada noche. Así deja de depender de la luz del colegio. Después, ponerle encima una app fácil. Y por último, un asistente con inteligencia artificial. Abraham les va a mostrar cómo se vería.</p>
   </div>
