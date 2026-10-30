@@ -3,335 +3,293 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="description" content="Borrador del nuevo sistema de la biblioteca del Instituto Alberto Einstein.">
-<title>BiblioIAE</title>
-<meta name="claude:viewport-fit-sides" content="cover">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&family=Source+Sans+3:wght@400;600&family=IBM+Plex+Mono:wght@500&display=swap">
-<style>
-/* Layout: una columna de lectura; pantallas de ejemplo como "fichas" de biblioteca */
-:root{
-  --bg:#F4F6F8; --card:#FFFFFF; --ink:#18232E; --muted:#5B6773; --line:#D9DFE5;
-  --accent:#1F6B57; --accent-soft:#E2F0EB; --warn:#9A4508; --warn-soft:#FDF0E1; --bad:#B42318;
-  --display:"Bricolage Grotesque",system-ui,sans-serif; --body:"Source Sans 3",system-ui,sans-serif; --mono:"IBM Plex Mono",ui-monospace,monospace;
-}
-@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
-  --bg:#11171D; --card:#1A222A; --ink:#E7ECF0; --muted:#9AA6B2; --line:#2B3640;
-  --accent:#5FC3A4; --accent-soft:#183229; --warn:#F0A453; --warn-soft:#33240F; --bad:#F2786D; color-scheme:dark}}
-:root[data-theme="dark"]{
-  --bg:#11171D; --card:#1A222A; --ink:#E7ECF0; --muted:#9AA6B2; --line:#2B3640;
-  --accent:#5FC3A4; --accent-soft:#183229; --warn:#F0A453; --warn-soft:#33240F; --bad:#F2786D; color-scheme:dark}
-body{background:var(--bg);color:var(--ink);font:17px/1.55 var(--body)}
-.wrap{max-width:900px;margin:0 auto;padding-block:40px 80px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));display:grid;gap:48px}
-h1,h2,h3{font-family:var(--display);text-wrap:balance;margin:0;line-height:1.15}
-h1{font-size:clamp(2.2rem,6vw,3.4rem);font-weight:800}
-h2{font-size:1.6rem;font-weight:800}
-h3{font-size:1.1rem;font-weight:600}
-p{margin:0;max-width:65ch}
-.eyebrow{font:500 .75rem var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--accent)}
-.sec{display:grid;gap:16px}
-.lead{font-size:1.15rem;color:var(--muted)}
-.code{font-family:var(--mono);font-size:.85em;background:var(--accent-soft);color:var(--accent);padding:1px 6px;border-radius:4px;white-space:nowrap}
-.grid{display:grid;gap:16px;grid-template-columns:repeat(auto-fit,minmax(250px,1fr))}
-.box{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:18px;display:grid;gap:8px;min-width:0}
-.box p{color:var(--muted);font-size:.95rem}
-.screen{background:var(--card);border:1px solid var(--line);border-radius:12px;overflow:hidden;min-width:0}
-.bar{display:flex;gap:8px;align-items:center;padding:10px 14px;border-bottom:1px solid var(--line);font:500 .75rem var(--mono);color:var(--muted)}
-.bar i{width:9px;height:9px;border-radius:50%;background:var(--line);display:inline-block}
-.bar .pill{margin-left:auto}
-.in{padding:16px;display:grid;gap:12px}
-.search{border:2px solid var(--accent);border-radius:8px;padding:10px 12px;color:var(--muted)}
-.row{display:flex;gap:12px;justify-content:space-between;align-items:flex-start;padding:10px 0;border-top:1px solid var(--line);flex-wrap:wrap}
-.row b{display:block}
-.row small{color:var(--muted)}
-.pill{font:600 .75rem var(--body);padding:3px 9px;border-radius:99px;background:var(--accent-soft);color:var(--accent);white-space:nowrap}
-.pill.w{background:var(--warn-soft);color:var(--warn)}
-.pill.b{background:var(--warn-soft);color:var(--bad)}
-table{width:100%;border-collapse:collapse;font-size:.92rem;font-variant-numeric:tabular-nums}
-td,th{text-align:left;padding:7px 6px;border-top:1px solid var(--line)}
-th{font:500 .72rem var(--mono);text-transform:uppercase;letter-spacing:.06em;color:var(--muted)}
-.tw{overflow-x:auto}
-.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:12px}
-.stat b{font:800 1.8rem var(--display);display:block;font-variant-numeric:tabular-nums}
-.stat small{color:var(--muted)}
-.bars{display:grid;gap:6px}
-.bars div{display:grid;grid-template-columns:90px 1fr 34px;gap:8px;align-items:center;font-size:.85rem}
-.bars span{height:10px;border-radius:3px;background:var(--accent)}
-.chat{display:grid;gap:10px}
-.msg{padding:10px 12px;border-radius:10px;max-width:85%;font-size:.95rem}
-.msg.u{justify-self:end;background:var(--accent);color:var(--card)}
-.msg.a{background:var(--bg);border:1px solid var(--line)}
-.sign{border:2px solid var(--ink);border-radius:8px;padding:14px;display:grid;gap:6px;font-family:var(--display)}
-.sign .big{font-size:1.6rem;font-weight:800}
-.barcode{height:38px;background:repeating-linear-gradient(90deg,var(--ink) 0 2px,transparent 2px 4px,var(--ink) 4px 5px,transparent 5px 8px,var(--ink) 8px 11px,transparent 11px 13px)}
-.flow{display:grid;grid-template-columns:1fr auto 1fr;gap:12px;align-items:center;text-align:center}
-.flow .box{text-align:left}
-.arrow{font:600 .8rem var(--mono);color:var(--muted)}
-@media (max-width:600px){.flow{grid-template-columns:1fr}.arrow{transform:none}}
-.phase{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:16px}
-.phase ul{margin:0;padding-left:1.1em;color:var(--muted);font-size:.95rem;display:grid;gap:4px}
-.phase .box.now{border:2px solid var(--accent)}
-.speech{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:22px;display:grid;gap:12px}
-.speech p{font-size:1.05rem}
-.who{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
-.note{font-size:.85rem;color:var(--muted)}
-.ex{font:500 .7rem var(--mono);color:var(--warn);text-transform:uppercase;letter-spacing:.06em}
-</style>
-<style>*,*::before,*::after{box-sizing:border-box}body{margin:0}img{max-width:100%}</style>
+<title>BiblioIAE · Instituto Alberto Einstein</title>
+<meta name="description" content="Propuesta para la Junta Directiva: nuevo sistema de la Biblioteca del Instituto Alberto Einstein.">
+<link rel="icon" href="img/favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500&display=swap">
+<link rel="stylesheet" href="estilo.css">
 </head>
 <body>
-<style>
-.cmp{width:100%;min-width:620px}
-.tag{font:600 .7rem var(--body);padding:2px 7px;border-radius:99px;background:var(--accent-soft);color:var(--accent)}
-.tag.d{background:var(--warn-soft);color:var(--warn)}
-.ideas{columns:2 260px;column-gap:24px;margin:0;padding-left:1.2em;color:var(--muted)}
-.ideas li{break-inside:avoid;margin-bottom:6px}
-.ideas b{color:var(--ink);font-weight:600}
-.layers{display:grid;gap:10px}
-.layer{display:grid;grid-template-columns:150px 1fr;gap:14px;background:var(--card);border:1px solid var(--line);border-radius:10px;padding:14px 16px;align-items:start}
-.layer h3{font-size:1rem}
-.layer p{color:var(--muted);font-size:.95rem}
-@media (max-width:560px){.layer{grid-template-columns:1fr}}
-.src{font-size:.8rem;color:var(--muted)}
-.src a{color:var(--accent)}
-.warnbox{background:var(--warn-soft);border:1px solid var(--warn);border-radius:10px;padding:14px 16px;color:var(--ink);display:grid;gap:6px}
-.warnbox p{max-width:none}
-</style>
-<div class="wrap">
 
-<header class="sec">
-  <span class="eyebrow">Borrador para la junta directiva · Instituto Alberto Einstein</span>
-  <h1>BiblioIAE</h1>
-  <p class="lead">Una biblioteca que no se cae cuando se va la luz, fácil de usar y con un asistente de IA. Propuesta de Marco Eisenman y Abraham.</p>
+<header class="top gut">
+  <div class="in-w">
+    <img class="logo" src="img/logo-iae-ib.png" alt="Instituto Alberto Einstein · IB World School" width="525" height="239">
+    <span class="sep"></span>
+    <div class="name">BiblioIAE<small>Biblioteca · Propuesta</small></div>
+    <nav aria-label="Secciones">
+      <a href="#situacion">Situación</a>
+      <a href="#propuesta">Propuesta</a>
+      <a href="#pantallas">Pantallas</a>
+      <a href="#etapas">Etapas</a>
+      <a href="#costos">Costos</a>
+      <a href="#pasos">Próximos pasos</a>
+    </nav>
+  </div>
 </header>
 
-<section class="sec">
-  <span class="eyebrow">Lo que pasa hoy</span>
-  <h2>Koha funciona, pero nos frena</h2>
-  <div class="grid">
-    <div class="box"><h3>Depende de un servidor físico</h3><p>Koha corre en un servidor del colegio. Cuando se va la luz se apaga, hay que reiniciarlo y mientras tanto nadie puede prestar ni buscar libros.</p></div>
-    <div class="box"><h3>Los respaldos pueden estar en el mismo disco</h3><p>Koha, tal como viene instalado, guarda copias de solo 2 días en el mismo servidor. Hay que confirmar con IT cómo está en el colegio: si las copias están en ese disco y se daña, se pierde todo.</p></div>
-    <div class="box"><h3>Registrar es difícil</h3><p>Koha ya permite un libro con varias copias, pero el proceso es complicado. Y el modo sin internet que venía dentro de Koha se quitó en la versión 23.11; solo quedan un complemento de Firefox y una herramienta de Windows.</p></div>
-  </div>
-  <p class="note">Unos 20,000 libros y unos 800 usuarios. Cada copia ya tiene su propia etiqueta de código de barras del colegio, aparte del ISBN.</p>
-</section>
-
-<section class="sec">
-  <span class="eyebrow">Cómo está armado</span>
-  <h2>Tres capas: Koha en la nube, nuestra app encima y un modo sin internet</h2>
-  <div class="layers">
-    <div class="layer"><h3>1 · Koha en la nube</h3><p>Pasamos el Koha de hoy, con todos sus datos y archivos subidos, a un servidor en internet. Antes de usarlo comparamos que estén todos los libros, usuarios y préstamos. Ya no depende de la luz del colegio. Respaldo automático cada noche, guardado fuera del servidor.</p></div>
-    <div class="layer"><h3>2 · App BiblioIAE</h3><p>Una app fácil encima de Koha, conectada por su API: catálogo bonito, registro rápido de copias, letreros, estadísticas y el asistente de IA. Koha sigue siendo el motor.</p></div>
-    <div class="layer"><h3>3 · Modo sin internet</h3><p>La compu del mostrador guarda el catálogo y los usuarios. Si se cae el internet sigue prestando y devolviendo, y al volver sube todo solo y en orden.</p></div>
-  </div>
-  <div class="flow">
-    <div class="box"><h3>Compu del mostrador</h3><p>Laptop con su batería + UPS para el router y el lector. Cada préstamo se guarda con un código único.</p></div>
-    <div class="arrow">se sincroniza ⇄</div>
-    <div class="box"><h3>Servidor en la nube</h3><p>Recibe cada préstamo una sola vez, aunque llegue repetido. Si dos compus prestan la misma copia, avisa al bibliotecario.</p></div>
+<section class="hero gut">
+  <div class="in-w">
+    <span class="chip"><i></i>Propuesta para la Junta Directiva · Borrador</span>
+    <h1>Biblio<span>IAE</span></h1>
+    <p class="lead">Un sistema para la Biblioteca del IAE que no se cae cuando se va la luz, que cualquiera puede usar y que tiene un asistente con inteligencia artificial.</p>
+    <div class="facts">
+      <div class="fact"><b>≈20,000</b><span>libros en el catálogo</span></div>
+      <div class="fact"><b>≈800</b><span>usuarios</span></div>
+      <div class="fact"><b>3</b><span>etapas de trabajo</span></div>
+    </div>
+    <p class="byline">Preparado por Marco Eisenman y Abraham · Acompaña: Prof. José Saldaña · Octubre 2026</p>
   </div>
 </section>
 
-<section class="sec">
-  <span class="eyebrow">Así se vería</span>
-  <h2>Pantallas de ejemplo</h2>
-  <p class="ex">Datos inventados, solo para mostrar la idea</p>
+<main>
 
-  <div class="grid">
-    <div class="screen">
-      <div class="bar"><i></i><i></i><i></i> Catálogo</div>
-      <div class="in">
-        <div class="search">Buscar: "volcanes"</div>
-        <div class="row"><div><b>Volcanes y terremotos</b><small>Pasillo 3 · Estante B · Ciencias</small></div><span class="pill">2 de 4 libres</span></div>
-        <div class="row"><div><b>El planeta Tierra</b><small>Pasillo 3 · Estante A · Ciencias</small></div><span class="pill w">Prestado · reservar</span></div>
+<section class="sec gut" id="situacion">
+  <div class="in-w">
+    <span class="kicker"><b>1</b>Situación actual</span>
+    <h2>Koha funciona, pero hoy nos frena</h2>
+    <p class="sub">La biblioteca usa Koha desde hace un año y medio. Es un sistema completo y gratuito, pero la forma en que está instalado trae tres problemas.</p>
+    <div class="grid">
+      <div class="card alert">
+        <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2 3 14h9l-1 8 10-12h-9l1-8z"/></svg></div>
+        <h3>Depende de un servidor físico</h3>
+        <p>Cuando se va la luz, el servidor se apaga y hay que reiniciarlo. Mientras tanto nadie puede prestar ni buscar libros.</p>
+      </div>
+      <div class="card alert">
+        <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M3 5v14c0 1.7 4 3 9 3s9-1.3 9-3V5"/><path d="M3 12c0 1.7 4 3 9 3s9-1.3 9-3"/></svg></div>
+        <h3>Respaldos en riesgo</h3>
+        <p>Tal como viene instalado, Koha guarda copias de solo 2 días en el mismo servidor. Hay que confirmar con IT cómo está en el colegio.</p>
+      </div>
+      <div class="card alert">
+        <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 8v4M12 16h.01"/></svg></div>
+        <h3>Difícil de usar</h3>
+        <p>Registrar varias copias de un libro es complicado, y el modo sin internet que traía Koha dentro se quitó en la versión 23.11.</p>
       </div>
     </div>
+    <p class="note">Dato a favor: cada copia ya tiene su propia etiqueta de código de barras del colegio, aparte del ISBN. No hay que volver a etiquetar.</p>
+  </div>
+</section>
 
-    <div class="screen">
-      <div class="bar"><i></i><i></i><i></i> Registrar un libro</div>
-      <div class="in">
-        <div class="search">Escanear ISBN: 978-1-338-32950-6</div>
-        <div><b>The Bad Guys: Episode 12</b><br><small class="note">Datos completados solos desde catálogos públicos</small></div>
-        <div class="tw"><table>
-          <tr><th>Copia</th><th>Etiqueta</th><th>Estante</th></tr>
-          <tr><td>1</td><td><span class="code">35715000081812</span></td><td>P2 · C</td></tr>
-          <tr><td>2</td><td><span class="code">escanear…</span></td><td>P2 · C</td></tr>
-        </table></div>
-        <small class="note">Un registro por ISBN. Solo se escanea la etiqueta de cada copia.</small>
-      </div>
+<section class="sec gut" id="propuesta">
+  <div class="in-w">
+    <span class="kicker"><b>2</b>Propuesta</span>
+    <h2>Tres capas: Koha en la nube, una app fácil encima y un modo sin internet</h2>
+    <p class="sub">No empezamos de cero: Koha sigue siendo el motor con todos los datos de hoy. Lo movemos a internet y le ponemos encima lo que le falta.</p>
+    <div class="layers">
+      <div class="layer"><div class="n">1</div><div><h3>Koha en la nube</h3><p>Pasamos el Koha actual, con sus datos y archivos, a un servidor en internet. Antes de usarlo comparamos que estén todos los libros, usuarios y préstamos. Respaldo automático cada noche, guardado fuera del servidor.</p></div></div>
+      <div class="layer"><div class="n">2</div><div><h3>App BiblioIAE</h3><p>Una app con el estilo del IAE, conectada a Koha: catálogo con pasillo y estante, registro rápido de copias, estadísticas, letreros con código y el asistente de IA.</p></div></div>
+      <div class="layer"><div class="n">3</div><div><h3>Modo sin internet</h3><p>La computadora del mostrador guarda el catálogo y los usuarios. Si se cae el internet sigue prestando y devolviendo; al volver, sube todo sola y en orden.</p></div></div>
     </div>
-
-    <div class="screen">
-      <div class="bar"><i></i><i></i><i></i> Préstamos <span class="pill w">sin internet · 3 en cola</span></div>
-      <div class="in">
-        <div class="search">Escanear carnet → escanear libro</div>
-        <div class="row"><div><b>Estudiante 8.º B</b><small>Volcanes y terremotos · vence 13 nov</small></div><span class="pill">Prestado</span></div>
-        <div class="row"><div><b>Profesor de Historia</b><small>Atlas mundial · venció hace 4 días</small></div><span class="pill b">Atrasado · email enviado</span></div>
-      </div>
+    <div class="sync">
+      <div class="card"><h3>Mostrador de la biblioteca</h3><p>Laptop con su batería y un UPS para el router y el lector. Cada préstamo se guarda con un código único.</p></div>
+      <div class="arrow">se sincroniza<br>⇄</div>
+      <div class="card"><h3>Servidor en la nube</h3><p>Recibe cada préstamo una sola vez, aunque llegue repetido. Si dos computadoras prestan la misma copia, avisa a la bibliotecaria.</p></div>
     </div>
+  </div>
+</section>
 
-    <div class="screen">
-      <div class="bar"><i></i><i></i><i></i> Estadísticas · octubre</div>
-      <div class="in">
-        <div class="stats">
-          <div class="stat"><b>412</b><small>préstamos</small></div>
-          <div class="stat"><b>186</b><small>personas</small></div>
-          <div class="stat"><b>23</b><small>atrasados</small></div>
-        </div>
-        <div class="bars">
-          <div>Secundaria<span style="width:100%"></span>210</div>
-          <div>Primaria<span style="width:68%"></span>143</div>
-          <div>Profesores<span style="width:28%"></span>59</div>
+<section class="sec gut" id="pantallas">
+  <div class="in-w">
+    <span class="kicker"><b>3</b>Así se vería</span>
+    <h2>Pantallas de ejemplo</h2>
+    <span class="ex">Datos inventados, solo para mostrar la idea</span>
+    <div class="screens">
+
+      <div class="app">
+        <div class="app-bar"><img src="img/icono-blanco.png" alt="">Catálogo</div>
+        <div class="app-in">
+          <div class="search"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>volcanes</div>
+          <div class="row"><div><b>Volcanes y terremotos</b><small>Pasillo 3 · Estante B · Ciencias</small></div><span class="pill">2 de 4 libres</span></div>
+          <div class="row"><div><b>El planeta Tierra</b><small>Pasillo 3 · Estante A · Ciencias</small></div><span class="pill w">Prestado · reservar</span></div>
+          <div class="row"><div><b>Islas de fuego</b><small>Pasillo 3 · Estante B · Ciencias</small></div><span class="pill">1 de 1 libre</span></div>
         </div>
       </div>
-    </div>
 
-    <div class="screen">
-      <div class="bar"><i></i><i></i><i></i> Asistente IA</div>
-      <div class="in chat">
-        <div class="msg u">Un estudiante busca algo sobre la Segunda Guerra Mundial para 8.º</div>
-        <div class="msg a">Tenemos "El diario de Ana Frank" (Pasillo 5, 2 libres). No tenemos "El niño con el pijama de rayas"; lo agrego a compras sugeridas.</div>
-        <div class="msg u">Hazme el informe del mes</div>
-        <div class="msg a">Listo: 412 préstamos, 23 atrasados y los 10 libros más pedidos.</div>
-      </div>
-    </div>
-
-    <div class="screen">
-      <div class="bar"><i></i><i></i><i></i> Letrero de pasillo</div>
-      <div class="in">
-        <div class="sign">
-          <span class="eyebrow">Pasillo 3</span>
-          <span class="big">Ciencias</span>
-          <span class="note">Estante A: Tierra y espacio · Estante B: Volcanes y clima</span>
-          <div class="barcode"></div>
+      <div class="app">
+        <div class="app-bar"><img src="img/icono-blanco.png" alt="">Registrar un libro</div>
+        <div class="app-in">
+          <div class="search"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M3 5v14M7 5v14M11 5v14M14 5v14M18 5v14M21 5v14"/></svg>ISBN 978-1-338-32950-6</div>
+          <div><b>The Bad Guys: Episode 12</b><br><small class="note">Datos completados solos desde catálogos públicos</small></div>
+          <div class="tw"><table>
+            <tr><th>Copia</th><th>Etiqueta</th><th>Ubicación</th></tr>
+            <tr><td>1</td><td><span class="code">35715000081812</span></td><td>P2 · C</td></tr>
+            <tr><td>2</td><td><span class="code">escanear…</span></td><td>P2 · C</td></tr>
+          </table></div>
+          <small class="note">Un registro por ISBN. Solo se escanea la etiqueta de cada copia.</small>
         </div>
-        <small class="note">Se escanea el código del estante para ver qué libros deberían estar ahí o hacer inventario.</small>
+      </div>
+
+      <div class="app">
+        <div class="app-bar"><img src="img/icono-blanco.png" alt="">Préstamos<span class="st pill g">Sin internet · 3 en cola</span></div>
+        <div class="app-in">
+          <div class="search"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M7 10h4M7 14h7"/></svg>Escanear carnet → escanear libro</div>
+          <div class="row"><div><b>Estudiante · 8.º B</b><small>Volcanes y terremotos · vence 13 nov</small></div><span class="pill">Prestado</span></div>
+          <div class="row"><div><b>Docente · Historia</b><small>Atlas mundial · venció hace 4 días</small></div><span class="pill b">Atrasado · aviso enviado</span></div>
+        </div>
+      </div>
+
+      <div class="app">
+        <div class="app-bar"><img src="img/icono-blanco.png" alt="">Estadísticas · octubre</div>
+        <div class="app-in">
+          <div class="stats">
+            <div class="stat"><b>412</b><small>préstamos</small></div>
+            <div class="stat"><b>186</b><small>lectores</small></div>
+            <div class="stat"><b>23</b><small>atrasados</small></div>
+          </div>
+          <div class="bars">
+            <div>Secundaria<span style="width:100%"></span>210</div>
+            <div>Primaria<span style="width:68%"></span>143</div>
+            <div>Docentes<span style="width:28%"></span>59</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="app">
+        <div class="app-bar"><img src="img/icono-blanco.png" alt="">Asistente IA</div>
+        <div class="app-in chat">
+          <div class="msg u">Un estudiante de 8.º busca algo sobre la Segunda Guerra Mundial</div>
+          <div class="msg a">Tenemos «El diario de Ana Frank» (Pasillo 5, 2 libres). No tenemos «El niño con el pijama de rayas»: lo agrego a compras sugeridas.</div>
+          <div class="msg u">Hazme el informe del mes</div>
+          <div class="msg a">Listo: 412 préstamos, 23 atrasados y los 10 libros más pedidos.</div>
+        </div>
+      </div>
+
+      <div class="app">
+        <div class="app-bar"><img src="img/icono-blanco.png" alt="">Letrero de pasillo</div>
+        <div class="app-in">
+          <div class="sign">
+            <span class="p">Pasillo 3</span>
+            <span class="big">Ciencias</span>
+            <span class="d">Estante A · Tierra y espacio &nbsp;|&nbsp; Estante B · Volcanes y clima</span>
+            <div class="barcode"></div>
+          </div>
+          <small class="note">Se escanea el código del estante para ver qué libros deberían estar ahí o para hacer inventario.</small>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section class="sec gut" id="referentes">
+  <div class="in-w">
+    <span class="kicker"><b>4</b>Investigación</span>
+    <h2>Qué hacen los mejores sistemas de bibliotecas escolares</h2>
+    <p class="sub">Estudiamos cómo funcionan los sistemas que usan otros colegios y tomamos de cada uno lo que necesitamos.</p>
+    <div class="table-card tw"><table>
+      <tr><th>Sistema</th><th>Precio aprox.</th><th>Lo que tomamos</th></tr>
+      <tr><td><b>Follett Destiny</b></td><td>Por cotización</td><td>Catálogo visual para estudiantes, listas de docentes, IA para informes</td></tr>
+      <tr><td><b>Libib</b></td><td>$99 al año</td><td>Escanear el ISBN y que los datos se llenen solos; kiosco en tableta</td></tr>
+      <tr><td><b>Atriuum</b></td><td>Por cotización</td><td>Pasa a modo sin internet solo y sincroniza al volver</td></tr>
+      <tr><td><b>Soutron</b></td><td>Por cotización</td><td>La IA solo responde con libros que existen en el catálogo</td></tr>
+      <tr><td><b>Beanstack</b></td><td>Desde $295 al año</td><td>Retos de lectura, insignias, bingo</td></tr>
+      <tr><td><b>Accessit</b></td><td>Por cotización</td><td>Lectura por nivel y búsqueda visual</td></tr>
+      <tr><td><b>Koha</b> (lo de hoy)</td><td>Gratis</td><td>Lo mantenemos como motor: es completo y no perdemos datos</td></tr>
+    </table></div>
+    <p class="note">Precios de sitios oficiales y comparadores (Capterra, FitGap); pueden variar.</p>
+  </div>
+</section>
+
+<section class="sec gut" id="etapas">
+  <div class="in-w">
+    <span class="kicker"><b>5</b>Etapas</span>
+    <h2>Qué va primero y qué después</h2>
+    <div class="phases">
+      <div class="phase now"><span class="pill g now-b">Empezamos aquí</span><span class="tag">Etapa 1</span><h3>Que no se caiga</h3><ul><li>Copia completa de Koha (IT)</li><li>Koha en la nube</li><li>Respaldo cada noche fuera del servidor</li><li>Alertas de atraso con el correo del colegio</li><li>Monitor que avisa si se cae</li></ul></div>
+      <div class="phase"><span class="tag">Etapa 2</span><h3>Fácil de usar</h3><ul><li>Catálogo con pasillo y estante</li><li>Registro rápido por ISBN y copias</li><li>Modo sin internet en el mostrador</li><li>Estadísticas e informes</li><li>Letreros con código por pasillo</li></ul></div>
+      <div class="phase"><span class="tag">Etapa 3</span><h3>Inteligente</h3><ul><li>Asistente IA del catálogo</li><li>Búsqueda por temas</li><li>Compras sugeridas</li><li>Retos de lectura</li><li>Lo que pida la Biblioteca</li></ul></div>
+    </div>
+  </div>
+</section>
+
+<section class="sec gut" id="ideas">
+  <div class="in-w">
+    <span class="kicker"><b>6</b>Más adelante</span>
+    <h2>Ideas que podría tener después</h2>
+    <div class="ideas">
+      <div class="idea"><p><b>Reservas</b> con lista de espera y aviso cuando vuelve el libro</p><span class="lvl">Fácil</span></div>
+      <div class="idea"><p><b>Límites por grado:</b> primaria 1 libro, docentes 10</p><span class="lvl">Fácil</span></div>
+      <div class="idea"><p><b>Sin multas:</b> no se presta otro hasta devolver</p><span class="lvl">Fácil</span></div>
+      <div class="idea"><p><b>Copia del aviso a los padres</b></p><span class="lvl">Fácil</span></div>
+      <div class="idea"><p><b>Carnet digital con QR</b> en el celular</p><span class="lvl">Fácil</span></div>
+      <div class="idea"><p><b>Kiosco de autopréstamo</b> en una tableta</p><span class="lvl">Fácil</span></div>
+      <div class="idea"><p><b>Pasar de grado</b> a todos al final del año con un botón</p><span class="lvl">Fácil</span></div>
+      <div class="idea"><p><b>Libros nunca prestados</b> para decidir qué comprar o retirar</p><span class="lvl">Fácil</span></div>
+      <div class="idea"><p><b>Inventario por estante:</b> dice qué falta o está mal ubicado</p><span class="lvl m">Medio</span></div>
+      <div class="idea"><p><b>Recomendaciones</b> por edad y nivel de lectura</p><span class="lvl m">Medio</span></div>
+      <div class="idea"><p><b>Entrar con la cuenta Google</b> del colegio</p><span class="lvl m">Medio</span></div>
+      <div class="idea"><p><b>Listas de lectura</b> de los docentes para Classroom</p><span class="lvl m">Medio</span></div>
+    </div>
+  </div>
+</section>
+
+<section class="sec gut" id="seguridad">
+  <div class="in-w">
+    <span class="kicker"><b>7</b>Seguridad y confiabilidad</span>
+    <h2>Cómo lo hacemos seguro</h2>
+    <div class="grid g3">
+      <div class="card"><h3>Datos de menores</h3><p>Se rige por la Ley 81 de 2019 de Panamá; el colegio debe confirmar que se pueden guardar en un servidor fuera del país. Solo guardamos lo necesario: nombre, grado, código, correo para avisos y préstamos.</p></div>
+      <div class="card"><h3>La IA no ve estudiantes</h3><p>El asistente solo recibe datos del catálogo, nunca nombres ni historiales. Tiene un tope fijo de gasto al mes.</p></div>
+      <div class="card"><h3>Respaldos probados</h3><p>Copia cifrada cada noche fuera del servidor. Una vez al mes restauramos una copia para comprobar que sirve.</p></div>
+      <div class="card"><h3>Avisos que llegan</h3><p>Las alertas salen de una cuenta del colegio (por ejemplo biblioteca@), configurada para no caer en spam.</p></div>
+      <div class="card"><h3>Pruebas de apagón</h3><p>Probamos cortar internet a mitad de un préstamo, prestar la misma copia en dos computadoras y desconectar la luz.</p></div>
+      <div class="card"><h3>Monitor 24/7</h3><p>Un servicio gratuito revisa cada pocos minutos que el sistema esté funcionando y avisa si se cae.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="sec gut" id="costos">
+  <div class="in-w">
+    <span class="kicker"><b>8</b>Costos</span>
+    <h2>Lo que costaría</h2>
+    <div class="table-card tw"><table>
+      <tr><th>Qué</th><th>Costo aproximado</th><th>Nota</th></tr>
+      <tr><td><b>Servidor de Koha en la nube</b></td><td>$10 a $45 al mes</td><td>Según el proveedor; lo estamos comparando</td></tr>
+      <tr><td><b>Asistente IA</b></td><td>$2 a $5 al mes</td><td>Con tope fijo</td></tr>
+      <tr><td><b>UPS para el mostrador</b></td><td>≈$90, una vez</td><td>Por dimensionar según lo que se conecte</td></tr>
+      <tr><td><b>Lector 2D</b> (lee también QR)</td><td>$25 a $60, una vez</td><td>Solo si el actual no lee QR</td></tr>
+    </table></div>
+  </div>
+</section>
+
+<section class="sec gut" id="pasos">
+  <div class="in-w">
+    <div class="cta">
+      <span class="kicker" style="color:var(--gold)"><b style="background:var(--gold);color:var(--navy-deep)">9</b>Próximos pasos</span>
+      <h2>Lo que necesitamos para empezar</h2>
+      <div class="grid g4">
+        <div class="card"><span class="num">1</span><h3>Copia de Koha</h3><p>Que IT haga una copia con <span class="code">sudo koha-dump --uploaded_files NOMBRE_INSTANCIA</span> (salen 2 archivos) y nos diga la versión de Koha.</p></div>
+        <div class="card"><span class="num">2</span><h3>Correo del colegio</h3><p>Una cuenta para enviar las alertas de libros atrasados.</p></div>
+        <div class="card"><span class="num">3</span><h3>Cuenta del servidor</h3><p>Los proveedores piden que la cuenta sea de un adulto o de la institución. Proponemos que quede a nombre del colegio.</p></div>
+        <div class="card"><span class="num">4</span><h3>Su recomendación</h3><p>Qué priorizar, qué ajustar y qué más necesita la Biblioteca.</p></div>
       </div>
     </div>
   </div>
 </section>
 
-<section class="sec">
-  <span class="eyebrow">Lo que estudiamos</span>
-  <h2>Qué hacen los mejores sistemas</h2>
-  <div class="tw"><table class="cmp">
-    <tr><th>Sistema</th><th>Precio aprox.</th><th>Lo que tomamos</th></tr>
-    <tr><td><b>Follett Destiny</b></td><td>Por cotización</td><td>Catálogo visual para niños, listas de profesores, IA para informes</td></tr>
-    <tr><td><b>Libib</b></td><td>$99 al año</td><td>Escanear el ISBN con el celular y que se llene solo; kiosco en tableta</td></tr>
-    <tr><td><b>Atriuum</b></td><td>Por cotización</td><td>Pasa a modo sin internet solo y sincroniza al volver</td></tr>
-    <tr><td><b>Soutron</b></td><td>Por cotización</td><td>La IA solo responde con libros que existen en el catálogo</td></tr>
-    <tr><td><b>Beanstack</b></td><td>Desde $295 al año</td><td>Retos de lectura, insignias, bingo</td></tr>
-    <tr><td><b>Accessit</b></td><td>Por cotización</td><td>Lectura por nivel y búsqueda visual</td></tr>
-    <tr><td><b>Koha (lo de hoy)</b></td><td>Gratis</td><td>Lo mantenemos como motor: es completo y no perdemos datos</td></tr>
-  </table></div>
-  <p class="src">Precios de sitios oficiales y comparadores (Capterra, FitGap); pueden variar.</p>
-</section>
+</main>
 
-<section class="sec">
-  <span class="eyebrow">Por etapas</span>
-  <h2>Qué va primero y qué después</h2>
-  <div class="phase">
-    <div class="box now"><h3>Etapa 1 · que no se caiga</h3><ul><li>Copia completa de Koha (IT)</li><li>Koha en la nube</li><li>Respaldo cada noche fuera del servidor</li><li>Alertas de atraso por correo del colegio</li><li>Monitor que avisa si se cae</li></ul></div>
-    <div class="box"><h3>Etapa 2 · fácil de usar</h3><ul><li>Catálogo nuevo con pasillo y estante</li><li>Registro rápido por ISBN y copias</li><li>Modo sin internet en el mostrador</li><li>Estadísticas e informes</li><li>Letreros con código por pasillo</li></ul></div>
-    <div class="box"><h3>Etapa 3 · inteligente</h3><ul><li>Asistente IA del catálogo</li><li>Búsqueda por temas</li><li>Compras sugeridas</li><li>Retos de lectura</li><li>Lo que pida la directora</li></ul></div>
+<footer class="gut">
+  <div class="in-w">
+    <img class="logo" src="img/logo-iae-ib.png" alt="Instituto Alberto Einstein · IB World School" width="525" height="239" loading="lazy">
+    <p>BiblioIAE es una propuesta estudiantil de Marco Eisenman y Abraham para la Biblioteca del Instituto Alberto Einstein, Panamá.</p>
   </div>
-</section>
-
-<section class="sec">
-  <span class="eyebrow">Más ideas</span>
-  <h2>Lo que podría tener después</h2>
-  <ul class="ideas">
-    <li><b>Reservas</b> con lista de espera y aviso cuando vuelve el libro <span class="tag">fácil</span></li>
-    <li><b>Límites por grado:</b> primaria 1 libro, profesores 10 <span class="tag">fácil</span></li>
-    <li><b>Sin multas:</b> se bloquea pedir otro hasta devolver <span class="tag">fácil</span></li>
-    <li><b>Copia del aviso a los padres</b> <span class="tag">fácil</span></li>
-    <li><b>Carnet digital con QR</b> en el celular <span class="tag">fácil</span></li>
-    <li><b>Inventario por estante:</b> escaneas y dice qué falta o está mal ubicado <span class="tag d">medio</span></li>
-    <li><b>Libro del mes</b> y novedades en la portada <span class="tag">fácil</span></li>
-    <li><b>Reseñas de estudiantes</b> aprobadas por la bibliotecaria <span class="tag d">medio</span></li>
-    <li><b>Recomendaciones por edad</b> y nivel de lectura <span class="tag d">medio</span></li>
-    <li><b>Entrar con la cuenta Google</b> del colegio <span class="tag d">medio</span></li>
-    <li><b>Listas de lectura</b> de los profesores para Classroom <span class="tag d">medio</span></li>
-    <li><b>Kiosco de autopréstamo</b> en una tableta <span class="tag">fácil</span></li>
-    <li><b>Pasar de grado</b> a todos al final del año con un botón <span class="tag">fácil</span></li>
-    <li><b>Libros nunca prestados</b> para decidir qué comprar o retirar <span class="tag">fácil</span></li>
-    <li><b>Registro de cambios:</b> quién hizo qué y cuándo <span class="tag">fácil</span></li>
-    <li><b>Accesibilidad:</b> letra grande y lector de pantalla <span class="tag d">medio</span></li>
-  </ul>
-</section>
-
-<section class="sec">
-  <span class="eyebrow">Ingeniería</span>
-  <h2>Cómo lo hacemos seguro y confiable</h2>
-  <div class="grid">
-    <div class="box"><h3>Datos de menores</h3><p>Se rige por la Ley 81 de 2019 de Panamá; el colegio debe confirmar que se pueden guardar en un servidor fuera del país. Solo guardamos lo necesario: nombre, grado, código, correo para avisos y préstamos. Cada persona ve solo lo que le toca según su rol.</p></div>
-    <div class="box"><h3>La IA no ve alumnos</h3><p>El asistente solo recibe datos del catálogo, nunca nombres ni historiales de estudiantes. Tiene un tope fijo de gasto al mes.</p></div>
-    <div class="box"><h3>Respaldos probados</h3><p>Copia cifrada cada noche fuera del servidor. Una vez al mes se restaura una copia para comprobar que sirve.</p></div>
-    <div class="box"><h3>Correos que llegan</h3><p>Las alertas salen de una cuenta del colegio (por ejemplo biblioteca@), configurada para que no caigan en spam.</p></div>
-    <div class="box"><h3>Pruebas de apagón</h3><p>Probamos cortar internet a mitad de un préstamo, prestar la misma copia en dos compus y desconectar la luz con el UPS.</p></div>
-    <div class="box"><h3>Monitor 24/7</h3><p>Un servicio gratis revisa cada pocos minutos que el sistema esté vivo y avisa por correo si se cae.</p></div>
+  <div class="in-w" style="margin-top:16px">
+    <p class="src">Fuentes:
+      <a href="https://koha-community.org/manual/latest/en/html/">Manual de Koha</a> ·
+      <a href="https://github.com/Koha-Community/Koha/blob/main/debian/scripts/koha-dump">koha-dump</a> ·
+      <a href="https://koha-community.org/koha-23-11-released/">Koha 23.11</a> ·
+      <a href="https://follettsoftware.com/ai-for-k-12-library-resource-operations/">Follett Destiny</a> ·
+      <a href="https://www.libib.com/pricing">Libib</a> ·
+      <a href="https://booksys.com/products/atriuum">Atriuum</a> ·
+      <a href="https://www.soutron.com/blog/general/artificial-intelligence-ai-added-to-soutron-discovery-v9-0/">Soutron</a> ·
+      <a href="https://beanstack.com/plans">Beanstack</a> ·
+      <a href="https://railway.com/pricing">Railway</a> ·
+      <a href="https://vlex.com.pa/vid/decreto-ejecutivo-285-2021-1049776104">Ley 81 / Decreto 285</a>
+    </p>
   </div>
-</section>
-
-<section class="sec">
-  <span class="eyebrow">Costos aproximados</span>
-  <h2>Lo que costaría</h2>
-  <div class="tw"><table class="cmp">
-    <tr><th>Qué</th><th>Costo</th><th>Nota</th></tr>
-    <tr><td>Servidor de Koha en la nube</td><td>$10 a $45 al mes</td><td>Según el proveedor; lo estamos comparando</td></tr>
-    <tr><td>Asistente IA</td><td>Unos $2 a $5 al mes</td><td>Con tope fijo</td></tr>
-    <tr><td>UPS para el mostrador</td><td>Unos $90, una vez</td><td>Por dimensionar: depende de qué se conecte (router, lector)</td></tr>
-    <tr><td>Lector 2D (también lee QR)</td><td>$25 a $60, una vez</td><td>Solo si el actual no lee QR</td></tr>
-  </table></div>
-</section>
-
-<section class="sec">
-  <span class="eyebrow">Para empezar</span>
-  <h2>Lo que necesitamos del colegio</h2>
-  <div class="grid">
-    <div class="box"><h3>Copia de Koha</h3><p>Que IT haga una copia con <span class="code">sudo koha-dump --uploaded_files NOMBRE_INSTANCIA</span> (salen 2 archivos) y nos diga la versión de Koha.</p></div>
-    <div class="box"><h3>Correo del colegio</h3><p>Una cuenta para mandar las alertas de atraso.</p></div>
-    <div class="box"><h3>Cuenta del servidor</h3><p>Los servidores piden que la cuenta sea de un adulto o del colegio. Proponemos que quede a nombre del colegio y nosotros la configuramos.</p></div>
-    <div class="box"><h3>Responsable</h3><p>El profesor José Saldaña revisa y mantiene el sistema con nosotros.</p></div>
-  </div>
-</section>
-
-<section class="sec">
-  <span class="eyebrow">Speech · unos 3 minutos entre los dos</span>
-  <h2>Qué dice cada uno</h2>
-
-  <div class="speech">
-    <div class="who"><h3>Marco</h3><span class="pill">abre y explica el problema</span></div>
-    <p>Buenos días. Somos Marco y Abraham, y queremos mejorar el sistema de la biblioteca.</p>
-    <p>Hoy la biblioteca usa Koha, que tiene unos 20,000 libros y 800 usuarios. Es un buen programa, pero corre en un servidor del colegio. Cuando se va la luz se apaga, hay que reiniciarlo y mientras tanto nadie puede prestar ni buscar libros. Además, Koha normalmente guarda sus copias de seguridad en el mismo servidor, y eso hay que revisarlo con IT.</p>
-    <p>Investigamos cómo lo hacen los mejores sistemas de colegios, como Follett Destiny, Libib y Atriuum, y armamos un plan en tres etapas.</p>
-    <p>Primero, pasar Koha a la nube con todos sus datos y respaldos cada noche. Así deja de depender de la luz del colegio. Después, ponerle encima una app fácil. Y por último, un asistente con inteligencia artificial. Abraham les va a mostrar cómo se vería.</p>
-  </div>
-
-  <div class="speech">
-    <div class="who"><h3>Abraham</h3><span class="pill">muestra la app y pide lo que falta</span></div>
-    <p>Gracias, Marco. Estas son pantallas de ejemplo.</p>
-    <p>En el catálogo buscas un libro y te dice si está libre y en qué pasillo y estante. Para registrar un libro nuevo solo se escanea el ISBN, los datos se llenan solos y después se escanea la etiqueta de cada copia.</p>
-    <p>Si se cae el internet, la compu del mostrador sigue prestando y, cuando vuelve, sube todo sola. También manda un correo cuando alguien se atrasa y muestra estadísticas: cuánta gente usa la biblioteca y qué libros se piden más.</p>
-    <p>El asistente de IA ayuda a la directora a encontrar libros por tema, ver qué nos falta comprar y hacer el informe del mes. Nunca ve datos de los estudiantes.</p>
-    <p>Para empezar necesitamos tres cosas: una copia de Koha que haga IT, un correo del colegio para las alertas y una cuenta del servidor a nombre del colegio. El profesor José Saldaña nos acompaña. ¿Qué nos recomiendan? Gracias.</p>
-  </div>
-</section>
-
-<section class="sec">
-  <span class="eyebrow">Fuentes</span>
-  <p class="src">
-    <a href="https://koha-community.org/manual/latest/en/html/">Manual de Koha</a> ·
-    <a href="https://github.com/Koha-Community/Koha/blob/main/debian/scripts/koha-dump">koha-dump</a> ·
-    <a href="https://help.bywatersolutions.com/portal/en/kb/articles/offline-circulation-tool">Koha sin internet (ByWater)</a> ·
-    <a href="https://follettsoftware.com/ai-for-k-12-library-resource-operations/">Follett Destiny AI</a> ·
-    <a href="https://www.libib.com/pricing">Libib</a> ·
-    <a href="https://booksys.com/products/atriuum">Atriuum</a> ·
-    <a href="https://www.soutron.com/blog/general/artificial-intelligence-ai-added-to-soutron-discovery-v9-0/">Soutron IA</a> ·
-    <a href="https://railway.com/pricing">Railway</a> ·
-    <a href="https://vlex.com.pa/vid/decreto-ejecutivo-285-2021-1049776104">Ley 81 / Decreto 285</a>
-  </p>
-</section>
-
-</div>
+</footer>
 
 </body>
 </html>

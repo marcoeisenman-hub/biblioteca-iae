@@ -1,8 +1,8 @@
-.DS_Store
-.vercel
-.env*
-node_modules
 *.sql
 *.sql.gz
 *.tar.gz
+.DS_Store
+.env*
 .playwright-mcp
+.vercel
+node_modules
