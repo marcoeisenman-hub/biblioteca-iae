@@ -290,5 +290,28 @@
   </div>
 </footer>
 
+<script>
+// Espacio / flecha abajo / AvPág: siguiente sección. Shift+Espacio / flecha arriba / RePág: anterior.
+(function(){
+  var secs=[].slice.call(document.querySelectorAll('main > section, body > section'));
+  if(!secs.length) secs=[].slice.call(document.querySelectorAll('section'));
+  var goal=null,last=0;
+  function top(){var h=document.querySelector('.top');return h?h.offsetHeight:0}
+  document.addEventListener('keydown',function(e){
+    var t=e.target.tagName;
+    if(/INPUT|TEXTAREA|SELECT|BUTTON/.test(t)||e.target.isContentEditable||e.metaKey||e.ctrlKey||e.altKey) return;
+    var next=(e.key===' '&&!e.shiftKey)||e.key==='ArrowDown'||e.key==='PageDown';
+    var prev=(e.key===' '&&e.shiftKey)||e.key==='ArrowUp'||e.key==='PageUp';
+    if(!next&&!prev) return;
+    var off=top(), y=(Date.now()-last<900&&goal!==null?goal:window.scrollY)+off, target=null;
+    if(next){for(var i=0;i<secs.length;i++){if(secs[i].offsetTop>y+5){target=secs[i];break}}}
+    else{for(var j=secs.length-1;j>=0;j--){if(secs[j].offsetTop<y-5){target=secs[j];break}}}
+    e.preventDefault();
+    goal=target?Math.max(0,target.offsetTop-off):(next?document.body.scrollHeight-window.innerHeight:0);
+    last=Date.now();
+    window.scrollTo({top:goal});
+  });
+})();
+</script>
 </body>
 </html>
