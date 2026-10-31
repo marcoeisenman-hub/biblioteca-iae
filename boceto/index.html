@@ -307,7 +307,10 @@
     if(next){for(var i=0;i<secs.length;i++){if(secs[i].offsetTop>y+5){target=secs[i];break}}}
     else{for(var j=secs.length-1;j>=0;j--){if(secs[j].offsetTop<y-5){target=secs[j];break}}}
     e.preventDefault();
+    var cur=y-off, step=(window.innerHeight-off)*0.9;
     goal=target?Math.max(0,target.offsetTop-off):(next?document.body.scrollHeight-window.innerHeight:0);
+    // Sección más alta que la pantalla: baja (o sube) de a una pantalla para no saltarse nada.
+    if(Math.abs(goal-cur)>step) goal=cur+(next?step:-step);
     last=Date.now();
     window.scrollTo({top:goal});
   });
