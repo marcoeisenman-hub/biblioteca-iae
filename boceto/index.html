@@ -78,8 +78,8 @@
     <p class="sub">Es lo que pidió la Biblioteca. No empezamos de cero: importamos lo que ya hay en Koha, y antes probamos todo con datos inventados.</p>
     <div class="layers">
       <div class="layer"><div class="n">1</div><div><h3>Importar desde Koha</h3><p>Koha exporta sus datos en Excel o CSV. Con IT entendemos esa estructura y la acomodamos a la nueva. Antes de usarla comparamos que no falte ningún libro ni copia, y que cada préstamo activo quede con el usuario y la copia correctos.</p></div></div>
-      <div class="layer"><div class="n">2</div><div><h3>App BiblioIAE</h3><p>Dos áreas: una administrativa, solo para la bibliotecaria y personal autorizado, y otra de consulta para estudiantes y docentes. En español e inglés, desde computadora, tableta o celular, y se entra con la cuenta Google del IAE.</p></div></div>
-      <div class="layer"><div class="n">3</div><div><h3>Asistente IA</h3><p>Recomienda libros por interés, edad y grado, en español, inglés o hebreo, y ayuda con informes. Solo sugiere: no cambia el inventario, los préstamos ni datos sin autorización.</p></div></div>
+      <div class="layer"><div class="n">2</div><div><h3>App BiblioIAE</h3><p>Dos áreas: una administrativa, solo para la bibliotecaria y personal autorizado, y otra de consulta. Usuarios: estudiantes, docentes, personal administrativo y de mantenimiento. En español e inglés, desde computadora, tableta o celular, y se entra con la cuenta Google del IAE.</p></div></div>
+      <div class="layer"><div class="n">3</div><div><h3>Asistente IA</h3><p>Recomienda libros por interés, edad y grado, en español, inglés o hebreo, y ayuda con informes. Cada respuesta dice de dónde sale para poder verificarla, y solo sugiere: no cambia el inventario, los préstamos ni datos sin autorización.</p></div></div>
     </div>
     <div class="sync">
       <div class="card"><h3>Mientras la construimos</h3><p>En un dominio propio y solo con datos inventados. Usa la misma pistola de código de barras que hay hoy.</p></div>
@@ -116,6 +116,7 @@
             <tr><td>1</td><td><span class="code">35715000081812</span></td><td>P2 · C</td></tr>
             <tr><td>2</td><td><span class="code">escanear…</span></td><td>P2 · C</td></tr>
           </table></div>
+          <small class="note">Ficha: título, autor, editorial, año, idioma, portada, materia, colección, nivel, ubicación y estado (disponible, prestado, reservado o en reparación).</small>
           <small class="note">El ISBN es igual en todas las copias, así que solo sirve para llenar los datos del título. Cada copia se identifica con su etiqueta del colegio (Code 39 o Code 128).</small>
         </div>
       </div>
@@ -197,8 +198,8 @@
     <h2>Qué va primero y qué después</h2>
     <div class="phases">
       <div class="phase now"><span class="pill g now-b">Empezamos aquí</span><span class="tag">Etapa 1</span><h3>La base, con datos inventados</h3><ul><li>Estructura de datos de Koha con IT</li><li>Catálogo y préstamos con la pistola actual</li><li>Entrar con la cuenta Google del IAE</li><li>Permisos por tipo de usuario</li><li>Copias de seguridad automáticas</li></ul></div>
-      <div class="phase"><span class="tag">Etapa 2</span><h3>Pasar de Koha</h3><ul><li>Autorización del colegio para los datos</li><li>Importar catálogo, usuarios y préstamos de Koha</li><li>Comparar que no falte nada</li><li>Inventario, informes y Excel/CSV</li><li>IT la monta en un subdominio del IAE</li></ul></div>
-      <div class="phase"><span class="tag">Etapa 3</span><h3>Inteligente</h3><ul><li>Asistente IA del catálogo</li><li>Recomendaciones por edad y grado</li><li>Compras sugeridas</li><li>Actividades y retos de lectura</li><li>Lo que pida la Biblioteca</li></ul></div>
+      <div class="phase"><span class="tag">Etapa 2</span><h3>Pasar de Koha</h3><ul><li>Autorización del colegio para los datos</li><li>Importar catálogo, usuarios y préstamos de Koha</li><li>Comparar que no falte nada</li><li>Inventario: existencias, pérdidas y compras</li><li>Informes y Excel/CSV</li><li>IT la monta en un subdominio del IAE</li></ul></div>
+      <div class="phase"><span class="tag">Etapa 3</span><h3>Inteligente</h3><ul><li>Asistente IA del catálogo</li><li>Recomendaciones por edad y grado</li><li>Compras sugeridas</li><li>Actividades, campañas y eventos de lectura</li><li>Lo que pida la Biblioteca</li></ul></div>
     </div>
   </div>
 </section>
