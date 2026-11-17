@@ -33,10 +33,10 @@
   <div class="in-w">
     <span class="chip"><i></i>Propuesta para la Junta Directiva · Borrador</span>
     <h1>Biblio<span>IAE</span></h1>
-    <p class="lead">Un sistema para la Biblioteca del IAE que no se cae cuando se va la luz, que cualquiera puede usar y que tiene un asistente con inteligencia artificial.</p>
+    <p class="lead">Una plataforma nueva para la Biblioteca del IAE, hecha por estudiantes: fácil de usar, segura y con un asistente de inteligencia artificial. Reemplaza a Koha sin perder lo que ya existe.</p>
     <div class="facts">
-      <div class="fact"><b>Nube</b><span>sin depender de la luz</span></div>
-      <div class="fact"><b>Cada noche</b><span>respaldo automático</span></div>
+      <div class="fact"><b>Nueva</b><span>importa los datos de Koha</span></div>
+      <div class="fact"><b>IA</b><span>que sugiere, no decide</span></div>
       <div class="fact"><b>3</b><span>etapas de trabajo</span></div>
     </div>
     <p class="byline">Preparado por Marco Eisenman y Abraham Mizrachi · Acompaña: Prof. José Saldaña</p>
@@ -48,18 +48,18 @@
 <section class="sec gut" id="situacion">
   <div class="in-w">
     <span class="kicker"><b>1</b>Situación actual</span>
-    <h2>Koha funciona, pero hoy nos frena</h2>
-    <p class="sub">La biblioteca usa Koha desde hace un año y medio. Es un sistema completo y gratuito, pero la forma en que está instalado trae tres problemas.</p>
+    <h2>Koha funciona, pero no hace lo que la Biblioteca necesita</h2>
+    <p class="sub">La biblioteca usa Koha desde hace un año y medio. Corre en una máquina virtual del colegio, con su base de datos en el mismo servidor y un respaldo semanal.</p>
     <div class="grid">
       <div class="card alert">
         <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2 3 14h9l-1 8 10-12h-9l1-8z"/></svg></div>
-        <h3>Depende de un servidor físico</h3>
-        <p>Cuando se va la luz, el servidor se apaga y hay que reiniciarlo. Mientras tanto nadie puede prestar ni buscar libros.</p>
+        <h3>Todo en un mismo lugar</h3>
+        <p>El sistema y sus datos están en el mismo servidor. Si algo falla, se pierde lo hecho desde el último respaldo semanal.</p>
       </div>
       <div class="card alert">
         <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M3 5v14c0 1.7 4 3 9 3s9-1.3 9-3V5"/><path d="M3 12c0 1.7 4 3 9 3s9-1.3 9-3"/></svg></div>
-        <h3>Respaldos en riesgo</h3>
-        <p>Tal como viene instalado, Koha guarda copias de solo 2 días en el mismo servidor. Hay que confirmar con IT cómo está en el colegio.</p>
+        <h3>Sin inteligencia artificial</h3>
+        <p>Koha no recomienda libros a los estudiantes ni ayuda a la bibliotecaria con informes o tendencias de lectura.</p>
       </div>
       <div class="card alert">
         <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 8v4M12 16h.01"/></svg></div>
@@ -67,24 +67,24 @@
         <p>Registrar varias copias de un libro es complicado, y el modo sin internet que traía Koha dentro se quitó en la versión 23.11.</p>
       </div>
     </div>
-    <p class="note">Dato a favor: cada copia ya tiene su propia etiqueta de código de barras del colegio, aparte del ISBN. No hay que volver a etiquetar.</p>
+    <p class="note">A favor: cada copia ya tiene su etiqueta de código de barras del colegio (Code 39 y Code 128) y Koha puede exportar su catálogo. No hay que volver a etiquetar ni registrar los libros de nuevo.</p>
   </div>
 </section>
 
 <section class="sec gut" id="propuesta">
   <div class="in-w">
     <span class="kicker"><b>2</b>Propuesta</span>
-    <h2>Tres capas: Koha en la nube, una app fácil encima y un modo sin internet</h2>
-    <p class="sub">No empezamos de cero: Koha sigue siendo el motor con todos los datos de hoy. Lo movemos a internet y le ponemos encima lo que le falta.</p>
+    <h2>Una plataforma propia que reemplaza a Koha</h2>
+    <p class="sub">Es lo que pidió la Biblioteca. No empezamos de cero: importamos lo que ya hay en Koha, y antes probamos todo con datos inventados.</p>
     <div class="layers">
-      <div class="layer"><div class="n">1</div><div><h3>Koha en la nube</h3><p>Pasamos el Koha actual, con sus datos y archivos, a un servidor en internet. Antes de usarlo comparamos que estén todos los libros, usuarios y préstamos. Respaldo automático cada noche, guardado fuera del servidor.</p></div></div>
-      <div class="layer"><div class="n">2</div><div><h3>App BiblioIAE</h3><p>Una app con el estilo del IAE, conectada a Koha: catálogo con pasillo y estante, registro rápido de copias, estadísticas, letreros con código y el asistente de IA.</p></div></div>
-      <div class="layer"><div class="n">3</div><div><h3>Modo sin internet</h3><p>La computadora del mostrador guarda el catálogo y los usuarios. Si se cae el internet sigue prestando y devolviendo; al volver, sube todo sola y en orden.</p></div></div>
+      <div class="layer"><div class="n">1</div><div><h3>Importar desde Koha</h3><p>Koha exporta su catálogo en Excel o CSV. Con IT entendemos esa estructura y la acomodamos a la nueva, y comparamos que no falte ningún libro ni copia antes de usarla.</p></div></div>
+      <div class="layer"><div class="n">2</div><div><h3>App BiblioIAE</h3><p>Dos áreas: una administrativa, solo para la bibliotecaria y personal autorizado, y otra de consulta para estudiantes y docentes. En español e inglés, desde computadora, tableta o celular, y se entra con la cuenta Google del IAE.</p></div></div>
+      <div class="layer"><div class="n">3</div><div><h3>Asistente IA</h3><p>Recomienda libros por interés, edad y grado, en español, inglés o hebreo, y ayuda con informes. Solo sugiere: no cambia el inventario, los préstamos ni datos sin autorización.</p></div></div>
     </div>
     <div class="sync">
-      <div class="card"><h3>Mostrador de la biblioteca</h3><p>Laptop con su batería y un UPS para el router y el lector. Cada préstamo se guarda con un código único.</p></div>
-      <div class="arrow">se sincroniza<br>⇄</div>
-      <div class="card"><h3>Servidor en la nube</h3><p>Recibe cada préstamo una sola vez, aunque llegue repetido. Si dos computadoras prestan la misma copia, avisa a la bibliotecaria.</p></div>
+      <div class="card"><h3>Mientras la construimos</h3><p>En un dominio propio y solo con datos inventados. Usa la misma pistola de código de barras que hay hoy.</p></div>
+      <div class="arrow">cuando esté lista<br>→</div>
+      <div class="card"><h3>En el IAE</h3><p>IT la monta en un subdominio del colegio. La dirección autoriza dónde se guardan los datos y quién entra.</p></div>
     </div>
   </div>
 </section>
@@ -121,7 +121,7 @@
       </div>
 
       <div class="app">
-        <div class="app-bar"><img src="img/icono-blanco.png" alt="">Préstamos<span class="st pill g">Sin internet · 3 en cola</span></div>
+        <div class="app-bar"><img src="img/icono-blanco.png" alt="">Préstamos<span class="st pill g">Pistola conectada</span></div>
         <div class="app-in">
           <div class="search"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M7 10h4M7 14h7"/></svg>Escanear carnet → escanear libro</div>
           <div class="row"><div><b>Estudiante · 8.º B</b><small>Volcanes y terremotos · vence 13 nov</small></div><span class="pill">Prestado</span></div>
@@ -149,7 +149,7 @@
         <div class="app-bar"><img src="img/icono-blanco.png" alt="">Asistente IA</div>
         <div class="app-in chat">
           <div class="msg u">Un estudiante de 8.º busca algo sobre la Segunda Guerra Mundial</div>
-          <div class="msg a">Tenemos «El diario de Ana Frank» (Pasillo 5, 2 libres). No tenemos «El niño con el pijama de rayas»: lo agrego a compras sugeridas.</div>
+          <div class="msg a">Tenemos «El diario de Ana Frank» (Pasillo 5, 2 libres). No tenemos «El niño con el pijama de rayas». ¿Lo agrego a compras sugeridas?</div>
           <div class="msg u">Hazme el informe del mes</div>
           <div class="msg a">Listo: 412 préstamos, 23 atrasados y los 10 libros más pedidos.</div>
         </div>
@@ -185,7 +185,7 @@
       <tr><td><b>Soutron</b></td><td>Por cotización</td><td>La IA solo responde con libros que existen en el catálogo</td></tr>
       <tr><td><b>Beanstack</b></td><td>Desde $295 al año</td><td>Retos de lectura, insignias, bingo</td></tr>
       <tr><td><b>Accessit</b></td><td>Por cotización</td><td>Lectura por nivel y búsqueda visual</td></tr>
-      <tr><td><b>Koha</b> (lo de hoy)</td><td>Gratis</td><td>Lo mantenemos como motor: es completo y no perdemos datos</td></tr>
+      <tr><td><b>Koha</b> (lo de hoy)</td><td>Gratis</td><td>Importamos sus datos: catálogo, copias y etiquetas</td></tr>
     </table></div>
     <p class="note">Precios de sitios oficiales y comparadores (Capterra, FitGap); pueden variar.</p>
   </div>
@@ -196,9 +196,9 @@
     <span class="kicker"><b>5</b>Etapas</span>
     <h2>Qué va primero y qué después</h2>
     <div class="phases">
-      <div class="phase now"><span class="pill g now-b">Empezamos aquí</span><span class="tag">Etapa 1</span><h3>Que no se caiga</h3><ul><li>Revisar con IT cómo está Koha hoy</li><li>Koha en la nube</li><li>Respaldo cada noche fuera del servidor</li><li>Alertas de atraso con el correo del colegio</li><li>Monitor que avisa si se cae</li></ul></div>
-      <div class="phase"><span class="tag">Etapa 2</span><h3>Fácil de usar</h3><ul><li>Catálogo con pasillo y estante</li><li>Registro rápido por ISBN y copias</li><li>Modo sin internet en el mostrador</li><li>Estadísticas e informes</li><li>Letreros con código por pasillo</li></ul></div>
-      <div class="phase"><span class="tag">Etapa 3</span><h3>Inteligente</h3><ul><li>Asistente IA del catálogo</li><li>Búsqueda por temas</li><li>Compras sugeridas</li><li>Retos de lectura</li><li>Lo que pida la Biblioteca</li></ul></div>
+      <div class="phase now"><span class="pill g now-b">Empezamos aquí</span><span class="tag">Etapa 1</span><h3>La base, con datos inventados</h3><ul><li>Estructura de datos de Koha con IT</li><li>Catálogo y préstamos con la pistola actual</li><li>Entrar con la cuenta Google del IAE</li><li>Permisos por tipo de usuario</li><li>Copias de seguridad automáticas</li></ul></div>
+      <div class="phase"><span class="tag">Etapa 2</span><h3>Pasar de Koha</h3><ul><li>Autorización del colegio para los datos</li><li>Importar el catálogo desde Koha</li><li>Comparar que no falte nada</li><li>Inventario, informes y Excel/CSV</li><li>IT la monta en un subdominio del IAE</li></ul></div>
+      <div class="phase"><span class="tag">Etapa 3</span><h3>Inteligente</h3><ul><li>Asistente IA del catálogo</li><li>Recomendaciones por edad y grado</li><li>Compras sugeridas</li><li>Actividades y retos de lectura</li><li>Lo que pida la Biblioteca</li></ul></div>
     </div>
   </div>
 </section>
@@ -217,8 +217,9 @@
       <div class="idea"><p><b>Pasar de grado</b> a todos al final del año con un botón</p><span class="lvl">Fácil</span></div>
       <div class="idea"><p><b>Libros nunca prestados</b> para decidir qué comprar o retirar</p><span class="lvl">Fácil</span></div>
       <div class="idea"><p><b>Inventario por estante:</b> dice qué falta o está mal ubicado</p><span class="lvl m">Medio</span></div>
-      <div class="idea"><p><b>Recomendaciones</b> por edad y nivel de lectura</p><span class="lvl m">Medio</span></div>
-      <div class="idea"><p><b>Entrar con la cuenta Google</b> del colegio</p><span class="lvl m">Medio</span></div>
+      <div class="idea"><p><b>Lector inalámbrico</b> en vez del de cable</p><span class="lvl">Fácil</span></div>
+      <div class="idea"><p><b>Etiqueta propia nueva</b>, diseñada junto con IT</p><span class="lvl m">Medio</span></div>
+      <div class="idea"><p><b>Modo sin internet</b> en el mostrador</p><span class="lvl m">Medio</span></div>
       <div class="idea"><p><b>Listas de lectura</b> de los docentes para Classroom</p><span class="lvl m">Medio</span></div>
     </div>
   </div>
@@ -229,12 +230,12 @@
     <span class="kicker"><b>7</b>Seguridad y confiabilidad</span>
     <h2>Cómo lo hacemos seguro</h2>
     <div class="grid g3">
-      <div class="card"><h3>Datos de menores</h3><p>Se rige por la Ley 81 de 2019 de Panamá; el colegio debe confirmar que se pueden guardar en un servidor fuera del país. Solo guardamos lo necesario: nombre, grado, código, correo para avisos y préstamos.</p></div>
-      <div class="card"><h3>La IA no ve estudiantes</h3><p>El asistente solo recibe datos del catálogo, nunca nombres ni historiales. Tiene un tope fijo de gasto al mes.</p></div>
-      <div class="card"><h3>Respaldos probados</h3><p>Copia cifrada cada noche fuera del servidor. Una vez al mes restauramos una copia para comprobar que sirve.</p></div>
-      <div class="card"><h3>Avisos que llegan</h3><p>Las alertas salen de una cuenta del colegio (por ejemplo biblioteca@), configurada para no caer en spam.</p></div>
-      <div class="card"><h3>Pruebas de apagón</h3><p>Probamos cortar internet a mitad de un préstamo, prestar la misma copia en dos computadoras y desconectar la luz.</p></div>
-      <div class="card"><h3>Monitor 24/7</h3><p>Un servicio gratuito revisa cada pocos minutos que el sistema esté funcionando y avisa si se cae.</p></div>
+      <div class="card"><h3>Datos de menores</h3><p>Se rige por la Ley 81 de 2019 de Panamá. La dirección del colegio autoriza dónde se guardan y quién accede. Solo guardamos lo necesario: nombre, grado, código, correo y préstamos.</p></div>
+      <div class="card"><h3>La IA no ve estudiantes</h3><p>El asistente solo recibe datos del catálogo, nunca nombres ni historiales. Solo sugiere, y tiene un tope fijo de gasto al mes.</p></div>
+      <div class="card"><h3>Administración aparte</h3><p>Los datos de estudiantes y préstamos van separados de las estadísticas y recomendaciones, que usan datos sin nombres.</p></div>
+      <div class="card"><h3>Permisos por nivel</h3><p>La bibliotecaria, el personal autorizado, los docentes y los estudiantes ven solo lo que les toca.</p></div>
+      <div class="card"><h3>Respaldos probados</h3><p>Copia automática cifrada fuera del servidor. Una vez al mes restauramos una para comprobar que sirve.</p></div>
+      <div class="card"><h3>Primero datos inventados</h3><p>No se carga nada real hasta demostrar que funciona, que es segura y que tiene respaldo.</p></div>
     </div>
   </div>
 </section>
@@ -245,10 +246,9 @@
     <h2>Lo que costaría</h2>
     <div class="table-card tw"><table>
       <tr><th>Qué</th><th>Costo aproximado</th><th>Nota</th></tr>
-      <tr><td><b>Servidor de Koha en la nube</b></td><td>$10 a $45 al mes</td><td>Según el proveedor; lo estamos comparando</td></tr>
+      <tr><td><b>Servidor de la app</b></td><td>$5 a $20 al mes</td><td>En la nube (por ejemplo Railway), o el servidor del colegio si IT lo prefiere</td></tr>
       <tr><td><b>Asistente IA</b></td><td>$2 a $5 al mes</td><td>Con tope fijo</td></tr>
-      <tr><td><b>UPS para el mostrador</b></td><td>≈$90, una vez</td><td>Por dimensionar según lo que se conecte</td></tr>
-      <tr><td><b>Lector 2D</b> (lee también QR)</td><td>$25 a $60, una vez</td><td>Solo si el actual no lee QR</td></tr>
+      <tr><td><b>Lector inalámbrico</b></td><td>$25 a $60, una vez</td><td>Opcional: la pistola actual ya sirve</td></tr>
     </table></div>
   </div>
 </section>
@@ -259,9 +259,9 @@
       <span class="kicker" style="color:var(--gold)"><b style="background:var(--gold);color:var(--navy-deep)">9</b>Próximos pasos</span>
       <h2>Lo que necesitamos para empezar</h2>
       <div class="grid g4">
-        <div class="card"><span class="num">1</span><h3>Reunión con IT</h3><p>Revisar juntos cómo está instalado Koha hoy y planear el paso a la nube.</p></div>
-        <div class="card"><span class="num">2</span><h3>Correo del colegio</h3><p>Una cuenta para enviar las alertas de libros atrasados.</p></div>
-        <div class="card"><span class="num">3</span><h3>Pago del servidor</h3><p>Que el colegio cubra el costo mensual del servidor y que IT tenga acceso de administrador.</p></div>
+        <div class="card"><span class="num">1</span><h3>Estructura de Koha</h3><p>Que IT nos muestre qué columnas exporta Koha, con un ejemplo inventado.</p></div>
+        <div class="card"><span class="num">2</span><h3>Autorización de datos</h3><p>Que la dirección del colegio autorice dónde se guardan los datos de estudiantes.</p></div>
+        <div class="card"><span class="num">3</span><h3>Servidor y subdominio</h3><p>Que el colegio cubra el servidor y que IT la monte en un subdominio del IAE.</p></div>
         <div class="card"><span class="num">4</span><h3>Su recomendación</h3><p>Qué priorizar, qué ajustar y qué más necesita la Biblioteca.</p></div>
       </div>
     </div>
