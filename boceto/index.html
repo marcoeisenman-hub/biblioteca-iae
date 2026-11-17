@@ -116,7 +116,7 @@
             <tr><td>1</td><td><span class="code">35715000081812</span></td><td>P2 · C</td></tr>
             <tr><td>2</td><td><span class="code">escanear…</span></td><td>P2 · C</td></tr>
           </table></div>
-          <small class="note">Un registro por ISBN. Solo se escanea la etiqueta de cada copia.</small>
+          <small class="note">El ISBN es igual en todas las copias, así que solo sirve para llenar los datos del título. Cada copia se identifica con su etiqueta del colegio (Code 39 o Code 128).</small>
         </div>
       </div>
 
@@ -197,7 +197,7 @@
     <h2>Qué va primero y qué después</h2>
     <div class="phases">
       <div class="phase now"><span class="pill g now-b">Empezamos aquí</span><span class="tag">Etapa 1</span><h3>La base, con datos inventados</h3><ul><li>Estructura de datos de Koha con IT</li><li>Catálogo y préstamos con la pistola actual</li><li>Entrar con la cuenta Google del IAE</li><li>Permisos por tipo de usuario</li><li>Copias de seguridad automáticas</li></ul></div>
-      <div class="phase"><span class="tag">Etapa 2</span><h3>Pasar de Koha</h3><ul><li>Autorización del colegio para los datos</li><li>Importar el catálogo desde Koha</li><li>Comparar que no falte nada</li><li>Inventario, informes y Excel/CSV</li><li>IT la monta en un subdominio del IAE</li></ul></div>
+      <div class="phase"><span class="tag">Etapa 2</span><h3>Pasar de Koha</h3><ul><li>Autorización del colegio para los datos</li><li>Importar catálogo, usuarios y préstamos de Koha</li><li>Comparar que no falte nada</li><li>Inventario, informes y Excel/CSV</li><li>IT la monta en un subdominio del IAE</li></ul></div>
       <div class="phase"><span class="tag">Etapa 3</span><h3>Inteligente</h3><ul><li>Asistente IA del catálogo</li><li>Recomendaciones por edad y grado</li><li>Compras sugeridas</li><li>Actividades y retos de lectura</li><li>Lo que pida la Biblioteca</li></ul></div>
     </div>
   </div>
@@ -231,7 +231,7 @@
     <h2>Cómo lo hacemos seguro</h2>
     <div class="grid g3">
       <div class="card"><h3>Datos de menores</h3><p>Se rige por la Ley 81 de 2019 de Panamá. La dirección del colegio autoriza dónde se guardan y quién accede. Solo guardamos lo necesario: nombre, grado, código, correo y préstamos.</p></div>
-      <div class="card"><h3>La IA no ve estudiantes</h3><p>El asistente solo recibe datos del catálogo, nunca nombres ni historiales. Solo sugiere, y tiene un tope fijo de gasto al mes.</p></div>
+      <div class="card"><h3>La IA no ve estudiantes</h3><p>El asistente solo recibe el catálogo y cifras totales, nunca nombres ni historiales. Solo sugiere, y tiene un tope fijo de gasto al mes.</p></div>
       <div class="card"><h3>Administración aparte</h3><p>Los datos de estudiantes y préstamos van separados de las estadísticas y recomendaciones, que usan datos sin nombres.</p></div>
       <div class="card"><h3>Permisos por nivel</h3><p>La bibliotecaria, el personal autorizado, los docentes y los estudiantes ven solo lo que les toca.</p></div>
       <div class="card"><h3>Respaldos probados</h3><p>Copia automática cifrada fuera del servidor. Una vez al mes restauramos una para comprobar que sirve.</p></div>
