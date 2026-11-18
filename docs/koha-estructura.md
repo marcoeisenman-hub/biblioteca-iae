@@ -39,7 +39,7 @@ biblio 1—N biblioitems 1—N items · borrowers N—1 categories · issues/old
 - Pedir a IT confirmar que el export incluya `items.itemnumber`, `location`, `holdingbranch`, `itemlost`, `withdrawn`, `reserves.itemnumber`, `reserves.item_level_hold` y `reserves.found`.
 
 ## Lo que llegó en el export (2026-11-18)
-Los CSV reales están solo en la Mac de Marco, en `datos-koha/` (ignorado por Git). Nunca se suben.
+Los originales están en la carpeta de Drive que compartió IT. Las copias locales del catálogo están en `datos-koha/` en la Mac de Marco, fuera de Git; nunca se suben. Los de usuarios y préstamos no se descargaron.
 - `items`: itemnumber, biblionumber, biblioitemnumber, barcode, itemcallnumber, notforloan.
   - Casi todos los códigos son numéricos de 14 dígitos; hay algunos de otras longitudes y algunas copias sin código. No hay códigos repetidos.
   - `itemcallnumber` viene vacío en todas las copias: la ubicación no está ahí.
