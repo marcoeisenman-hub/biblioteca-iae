@@ -6,3 +6,5 @@
 .playwright-mcp
 .vercel
 node_modules
+datos-koha/
+*.csv

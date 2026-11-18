@@ -37,3 +37,13 @@ biblio 1—N biblioitems 1—N items · borrowers N—1 categories · issues/old
 - Estado: no disponible si `notforloan`, `itemlost` o `withdrawn`; prestado si hay fila en `issues`. Reservas: `reserves.item_level_hold` dice si se pidió una copia concreta o el título; `reserves.itemnumber` es la copia pedida o asignada (puede estar vacío); solo `found` dice si ya está apartada o lista para retiro. Una reserva de título sin copia asignada no marca todas las copias. `found` dice si está pendiente, en tránsito, en proceso o esperando retiro.
 - `borrowers` es dato protegido: no se importa hasta tener autorización del colegio.
 - Pedir a IT confirmar que el export incluya `items.itemnumber`, `location`, `holdingbranch`, `itemlost`, `withdrawn`, `reserves.itemnumber`, `reserves.item_level_hold` y `reserves.found`.
+
+## Lo que llegó en el export (2026-11-18)
+Los CSV reales están solo en la Mac de Marco, en `datos-koha/` (ignorado por Git). Nunca se suben.
+- `items`: itemnumber, biblionumber, biblioitemnumber, barcode, itemcallnumber, notforloan.
+  - Casi todos los códigos son numéricos de 14 dígitos; hay algunos de otras longitudes y algunas copias sin código. No hay códigos repetidos.
+  - `itemcallnumber` viene vacío en todas las copias: la ubicación no está ahí.
+  - Faltan `location`, `holdingbranch`, `homebranch`, `itemlost`, `withdrawn`.
+- `biblioitems`: la mayoría tiene ISBN; `itemtype` casi siempre vacío.
+- `categories` salió igual que `itemtypes` (export equivocado).
+- No vino `reserves` ni `branches`.
