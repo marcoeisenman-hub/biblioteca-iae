@@ -32,7 +32,8 @@ Fuente: Carlos Lasso (IT), 2026-11-18, "estructura_bd_koha.pdf". Solo el esquema
 biblio 1—N biblioitems 1—N items · borrowers N—1 categories · issues/old_issues: borrower + item · reserves: borrower + biblio.
 
 ## Para la app nueva
-- Copia = `items.barcode` (Code 39/128), no el ISBN.
-- Ubicación = `items.itemcallnumber` + `homebranch`.
-- Estado: `notforloan` + si hay fila en `issues` (prestado) o `reserves`.
+- Identificador interno de la copia = `items.itemnumber`. Lo que se escanea = `items.barcode` (Code 39/128), no el ISBN. `barcode` puede venir vacío: esas copias se importan igual y se marcan para etiquetar.
+- Ubicación = `items.itemcallnumber` + `location` (estante, si está) + `holdingbranch` (sede donde está; `homebranch` es la dueña).
+- Estado: `notforloan`; prestado si hay fila en `issues`; reservado solo si la reserva tiene `itemnumber` o ya fue asignada (`found`). Una reserva de título (sin `itemnumber`) no marca todas las copias.
 - `borrowers` es dato protegido: no se importa hasta tener autorización del colegio.
+- Pedir a IT confirmar que el export incluya `itemnumber`, `location` y `holdingbranch`.
