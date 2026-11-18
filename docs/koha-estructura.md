@@ -34,6 +34,6 @@ biblio 1—N biblioitems 1—N items · borrowers N—1 categories · issues/old
 ## Para la app nueva
 - Identificador interno de la copia = `items.itemnumber`. Lo que se escanea = `items.barcode` (Code 39/128), no el ISBN. `barcode` puede venir vacío: esas copias se importan igual y se marcan para etiquetar.
 - Ubicación = `items.itemcallnumber` + `location` (estante, si está) + `holdingbranch` (sede donde está; `homebranch` es la dueña).
-- Estado: no disponible si `notforloan`, `itemlost` o `withdrawn`; prestado si hay fila en `issues`. Reservas: `reserves.item_level_hold` dice si se pidió una copia concreta o el título; `reserves.itemnumber` es la copia asignada (puede estar vacío). Una reserva de título sin copia asignada no marca todas las copias. `found` dice si está pendiente, en tránsito, en proceso o esperando retiro.
+- Estado: no disponible si `notforloan`, `itemlost` o `withdrawn`; prestado si hay fila en `issues`. Reservas: `reserves.item_level_hold` dice si se pidió una copia concreta o el título; `reserves.itemnumber` es la copia pedida o asignada (puede estar vacío); solo `found` dice si ya está apartada o lista para retiro. Una reserva de título sin copia asignada no marca todas las copias. `found` dice si está pendiente, en tránsito, en proceso o esperando retiro.
 - `borrowers` es dato protegido: no se importa hasta tener autorización del colegio.
-- Pedir a IT confirmar que el export incluya `items.itemnumber`, `location`, `holdingbranch`, `itemlost`, `withdrawn`, `reserves.itemnumber` y `reserves.item_level_hold`.
+- Pedir a IT confirmar que el export incluya `items.itemnumber`, `location`, `holdingbranch`, `itemlost`, `withdrawn`, `reserves.itemnumber`, `reserves.item_level_hold` y `reserves.found`.
