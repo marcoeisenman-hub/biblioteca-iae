@@ -47,4 +47,4 @@ Los originales están en la carpeta de Drive que compartió IT. Las copias local
 - `biblioitems`: la mayoría tiene ISBN; `itemtype` casi siempre vacío.
 - `categories` salió igual que `itemtypes` (export equivocado).
 - No vino `reserves` ni `branches`.
-- 2.º export de IT (items v2 con `location` + lista LOCATIONS): `location` está vacío en casi todas las copias, e `itemcallnumber` en todas. LOCATIONS solo trae los códigos que vienen por defecto en Koha (FIC, CHILD, GEN, REF…). Conclusión: Koha no guarda la ubicación. La app nueva la agrega, con la clasificación que elija la bibliotecaria.
+- 2.º export de IT (items v2 con `location` + lista LOCATIONS): `location` está vacío en casi todas las copias, e `itemcallnumber` en todas. LOCATIONS solo trae los códigos que vienen por defecto en Koha (FIC, CHILD, GEN, REF…). Conclusión: con este export no se puede saber el estante de forma fiable. Se conservan los pocos `location` que sí llegaron, y la app nueva agrega pasillo y estante con la clasificación que elija la bibliotecaria.
